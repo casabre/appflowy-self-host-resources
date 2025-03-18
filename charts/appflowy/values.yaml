@@ -16,6 +16,8 @@ global:
         enabled: false
         # -- Nginx TLS secret name if using https
         secretName: ""
+      # -- Nginx extra annotations
+      extraAnnotations: {}
     traefik:
       # -- Enable to create IngressRoute for Traefik Ingress Controller
       enabled: false
@@ -178,8 +180,10 @@ postgresql:
   auth:
     username: appflowy
     database: appflowy
-    password: password
-    postgresPassword: password
+    existingSecret: "appflowy"
+    secretKey:
+      adminPasswordKey: postgresAdminPassword
+      userPasswordKey: postgresPassword
   primary:
     persistence:
       enabled: true
